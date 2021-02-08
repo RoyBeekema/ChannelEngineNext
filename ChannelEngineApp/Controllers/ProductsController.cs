@@ -1,6 +1,7 @@
 ﻿using MerchantDomain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,18 +25,34 @@ namespace ChannelEngineApp.Controllers
         [HttpGet]
         public async Task<IEnumerable<ProductModel>> Get()
         {
-            await _repository.Sync();
+            try
+            {
+                await _repository.Sync();
 
-            return GetProducts();
+                return GetProducts();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                throw;
+            }
         }
 
         [HttpPatch("{merchantProductNo}/{property}/{value}")]
         public async Task<IEnumerable<ProductModel>> Patch(string merchantProductNo, string property, int value)
         {
-            await _repository.Set(merchantProductNo, property, value);
-            await _repository.Sync();
+            try
+            {
+                await _repository.Set(merchantProductNo, property, value);
+                await _repository.Sync();
 
-            return GetProducts();
+                return GetProducts();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                throw;
+            }
         }
 
         private IEnumerable<ProductModel> GetProducts()

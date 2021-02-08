@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -10,77 +11,93 @@ namespace ChannelEngineApp
     public class ProductRepository : IBaseProductRepository
     {
         readonly IHttpClientFactory _clientFactory;
+        readonly ILogger<ProductRepository> _logger;
 
-        public ProductRepository(IHttpClientFactory clientFactory)
+        public ProductRepository(IHttpClientFactory clientFactory, ILogger<ProductRepository> logger)
         {
             _clientFactory = clientFactory;
+            _logger = logger;
         }
 
+        /// <summary>
+        /// Products retrieved from the dataset
+        /// </summary>
         public IEnumerable<Product> Products { get; private set; }
 
-        public int PageIndex = 1;
-        public bool? Succes = null;
-
+        /// <summary>
+        /// Retrieves the latest version of the products dataset and stores it in the Products property
+        /// </summary>
+        /// <returns></returns>
         public async Task Sync()
         {
-            Succes = null;
-
-            var client = _clientFactory.CreateClient();
-            string requestUri = RepositoryConfig.Host + "products?search=001201&apikey=" + RepositoryConfig.ApiKey;
-            var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
-                request.Headers.Add("Accept", "application/json");
-            var response = await client.GetAsync(requestUri);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string responseString = await response.Content.ReadAsStringAsync();
+                var client = _clientFactory.CreateClient();
+                string requestUri = RepositoryConfig.Host + "products?search=001201&apikey=" + RepositoryConfig.ApiKey;
+                var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
+                request.Headers.Add("Accept", "application/json");
+                var response = await client.GetAsync(requestUri);
 
-                try
+                if (response.IsSuccessStatusCode)
                 {
+                    string responseString = await response.Content.ReadAsStringAsync();
+
                     var productSet = JsonSerializer.Deserialize<ProductSet>(responseString);
                     Products = productSet.Content;
-                    Succes = true;
                 }
-                catch(Exception)
+                else
                 {
+                    _logger.LogError(response.StatusCode + " status code was returned");
                     Products = Array.Empty<Product>();
-                    Succes = false;
                 }
+
             }
-            else
+            catch (Exception e) 
             {
-                Products = Array.Empty<Product>();
-                Succes = false;
+                _logger.LogError(e.Message);
             }
         }
 
+        /// <summary>
+        /// Changes a single value within the merchant data set
+        /// </summary>
+        /// <param name="key">The merchant product number</param>
+        /// <param name="property">The property name to change. (Currently only 'Stock' is supported)</param>
+        /// <param name="value">The value to set</param>
+        /// <returns></ret
         public async Task Set(string key, string property, int value)
         {
-            Succes = null;
-
-            string payload;
-
-            switch (property)
+            try
             {
-                case "Stock":
-                    payload = JsonSerializer.Serialize<ProductStock>(new ProductStock { Value = value });
-                    break;
-                default:
-                    return;
+                string payload;
+
+                switch (property)
+                {
+                    case "Stock":
+                        payload = JsonSerializer.Serialize<ProductStock>(new ProductStock { Value = value });
+                        break;
+                    default:
+                        return;
+                }
+
+                var client = _clientFactory.CreateClient();
+                string requestUri = RepositoryConfig.Host + "products/" + key + "?apikey=" + RepositoryConfig.ApiKey;
+                var request = new HttpRequestMessage(HttpMethod.Patch, requestUri);
+                    request.Headers.Add("Accept", "application/json");
+
+                request.Content = new StringContent("["+payload+"]", Encoding.UTF8, "application/json");
+
+                var response = await client.SendAsync(request);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    _logger.LogError(response.StatusCode+" status code was returned");
+                }
+
             }
-
-            var client = _clientFactory.CreateClient();
-            string requestUri = RepositoryConfig.Host + "products/" + key + "?apikey=" + RepositoryConfig.ApiKey;
-            var request = new HttpRequestMessage(HttpMethod.Patch, requestUri);
-                request.Headers.Add("Accept", "application/json");
-
-            request.Content = new StringContent("["+payload+"]", Encoding.UTF8, "application/json");
-
-            var response = await client.SendAsync(request);
-
-            if (!response.IsSuccessStatusCode)
+            catch (Exception e)
             {
-                // TODO
+                _logger.LogError(e.Message);
             }
         }
     }

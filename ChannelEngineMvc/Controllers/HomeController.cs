@@ -27,7 +27,9 @@ namespace ChannelEngineMvc.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var reqId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+            _logger.LogError(reqId);
+            return View(new ErrorViewModel { RequestId = reqId });
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using MerchantDomain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,9 +25,17 @@ namespace ChannelEngineApp.Controllers
         [HttpGet]
         public async Task<IEnumerable<OrderModel>> Get()
         {
-            await _repository.Sync();
+            try
+            {
+                await _repository.Sync();
 
-            return GetOrders();
+                return GetOrders();
+            }
+            catch(Exception e)
+            {
+                _logger.LogError(e.Message);
+                throw;
+            }            
         }
 
         private IEnumerable<OrderModel> GetOrders()
