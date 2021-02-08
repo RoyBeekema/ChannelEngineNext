@@ -12,7 +12,7 @@ namespace ChannelEngineTest
 {
     public class Tests
     {
-        List<Order> orders = new List<Order>();
+        readonly List<Order> orders = new List<Order>();
 
         [SetUp]
         public void Setup()

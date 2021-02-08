@@ -9,12 +9,12 @@ namespace ChannelEngineConsoleApp
 {
     class Program
     {
-          ///////////////////////////////////////////////////
-         // Deprecated App: Please use Postman or Newman. //
+        ///////////////////////////////////////////////////
+        // Deprecated App: Please use Postman or Newman. //
         ///////////////////////////////////////////////////
 
-        static string ApiKey = "541b989ef78ccb1bad630ea5b85c6ebff9ca3322";
-        static string MerchantHost = "https://api-dev.channelengine.net/api/v2/";
+        readonly static string ApiKey = "541b989ef78ccb1bad630ea5b85c6ebff9ca3322";
+        readonly static string MerchantHost = "https://api-dev.channelengine.net/api/v2/";
         static bool Success;
 
         static async Task GetOrdersTop5SortedAscending()

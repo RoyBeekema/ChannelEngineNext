@@ -8,7 +8,7 @@ namespace ChannelEngineApp
 {
     public class OrderRepository : IBaseOrderRepository
     {
-        IHttpClientFactory _clientFactory;
+        readonly IHttpClientFactory _clientFactory;
 
         public OrderRepository(IHttpClientFactory clientFactory)
         {

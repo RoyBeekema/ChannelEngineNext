@@ -9,7 +9,7 @@ namespace ChannelEngineApp
 {
     public class ProductRepository : IBaseProductRepository
     {
-        IHttpClientFactory _clientFactory;
+        readonly IHttpClientFactory _clientFactory;
 
         public ProductRepository(IHttpClientFactory clientFactory)
         {
