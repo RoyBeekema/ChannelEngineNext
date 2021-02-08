@@ -1,4 +1,4 @@
-namespace ChannelEngineApp
+namespace MerchantData
 {
     public class Product
     {

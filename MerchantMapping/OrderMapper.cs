@@ -1,7 +1,7 @@
 ﻿using MerchantDomain;
 using System.Collections.Generic;
 
-namespace Mapping
+namespace MerchantMapping
 {
     // TODO[r.beekema] Use mapping for better design
     public static class OrderMapper

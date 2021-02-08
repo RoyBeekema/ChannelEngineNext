@@ -1,7 +1,8 @@
+using MerchantData;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ChannelEngineApp
+namespace MerchantLogic
 {
     public interface IBaseOrderRepository
     {

@@ -1,8 +1,9 @@
+using MerchantData;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Net.Http;
 
-namespace ChannelEngineApp
+namespace MerchantLogic
 {
     public class Repository
     {

@@ -2,11 +2,12 @@ using ChannelEngineMvc.Controllers;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
-using ChannelEngineApp;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using MerchantDomain;
 using System.Linq;
+using MerchantData;
+using MerchantLogic;
 
 namespace ChannelEngineTest
 {

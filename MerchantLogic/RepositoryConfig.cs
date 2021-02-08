@@ -1,4 +1,4 @@
-namespace ChannelEngineApp
+namespace MerchantLogic
 {
     public static class RepositoryConfig
     {
