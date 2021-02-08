@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MerchantDomain.ProductModel>
+
+@{
+    ViewData["Title"] = "Product data";
+}
+
+<div class="text-center">
+    <h1 class="display-3">Product data</h1>
+    <p>Vooraad aanpasbaar via de lelijke knoppen.</p>
+    <table class="table table-bordered table-hover" style="table-layout:fixed">
+        <tr>
+            <th>Beschrijving</th>
+            <th>Product nummer</th>
+            <th>Voorraad</th>
+            <th>Voorraad aanpassen</th>
+        </tr>
+        @foreach (var d in Model)
+        {
+            string id = "_" + d.GetHashCode();
+            <tr>
+                <td>@d.Name</td>
+                <td>@d.MerchantProductNo</td>
+                <td id="@id">@d.Stock</td>
+                <td>
+                    <button onclick="updateProductsData('@id','@d.MerchantProductNo',0); return false;">0</button>
+                    <button onclick="updateProductsData('@id','@d.MerchantProductNo',parseInt(document.getElementById('@id').innerText)-1); return false;">-</button>
+                    <button onclick="updateProductsData('@id','@d.MerchantProductNo',parseInt(document.getElementById('@id').innerText)+1); return false;">+</button>
+                    <button onclick="updateProductsData('@id','@d.MerchantProductNo',25); return false;">25</button>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+
+@section Scripts {
+    <script>
+        function updateProductsData(cellId, merchantProductNo, stock) {
+
+            var url = location.href + '/Post?merchantProductNo=' + merchantProductNo + '&property=Stock&value=' + stock;
+
+            fetch(url, { method: 'POST' })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (jsonArray) {
+                    
+                    for (var i = 0; i < jsonArray.length; i++) {
+                        var o = jsonArray[i];
+
+                        if (o.merchantProductNo == merchantProductNo)
+                        {
+                            document.getElementById(cellId).innerText = stock;
+                        }
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+
+    </script>
+}

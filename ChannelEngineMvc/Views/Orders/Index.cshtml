@@ -1,0 +1,25 @@
+﻿@model IEnumerable<MerchantDomain.OrderModel>  
+
+@{
+    ViewData["Title"] = "Orders data";
+}
+
+<div class="text-center">
+    <h1 class="display-5">Orders data</h1>
+    <p>Top 5, gesorteed op aantal aflopend.</p>
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Beschrijving</th>
+            <th>Product nummer</th>
+            <th>Aantal</th>
+        </tr>
+        @foreach (var d in Model)
+        {
+            <tr id="@d.Id">
+                <td>@d.Description</td>
+                <td>@d.Gtin</td>
+                <td>@d.Quantity</td>
+            </tr>
+        }
+    </table>
+</div>
