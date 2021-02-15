@@ -12,7 +12,7 @@ export class FetchProducts extends Component {
         this.populateProductsData();
     }
 
-    static renderProductsTable(products, that) {
+    static renderProductsTable(products, component) {
         return (
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
@@ -30,10 +30,10 @@ export class FetchProducts extends Component {
                             <td>{product.merchantProductNo}</td>
                             <td>{product.stock}</td>
                             <td>
-                                <button onClick={(e) => that.setStock(product.merchantProductNo, 0)}>0</button>
-                                <button onClick={(e) => that.setStock(product.merchantProductNo, product.stock-1)}>-</button>
-                                <button onClick={(e) => that.setStock(product.merchantProductNo, product.stock+1)}>+</button>
-                                <button onClick={(e) => that.setStock(product.merchantProductNo, 25)}>25</button>
+                                <button onClick={(e) => component.setStock(product.merchantProductNo, 0)}>0</button>
+                                <button onClick={(e) => component.setStock(product.merchantProductNo, product.stock-1)}>-</button>
+                                <button onClick={(e) => component.setStock(product.merchantProductNo, product.stock+1)}>+</button>
+                                <button onClick={(e) => component.setStock(product.merchantProductNo, 25)}>25</button>
                             </td>
                         </tr>
                     )}
@@ -43,7 +43,7 @@ export class FetchProducts extends Component {
     }
 
     setStock(merchantProductNo, stock) {
-        this.updateProductsData(merchantProductNo,stock)
+        this.updateProductsData(merchantProductNo,'Stock',stock)
     }
 
     render() {
@@ -66,8 +66,8 @@ export class FetchProducts extends Component {
         this.setState({ products: data, loading: false });
     }
 
-    async updateProductsData(merchantProductNo, stock) {
-        const response = await fetch('products/' + merchantProductNo + '/Stock/' + stock, { method: 'PATCH' });
+    async updateProductsData(merchantProductNo, property, stock) {
+        const response = await fetch('products/' + merchantProductNo + '/' + property + '/' + stock, { method: 'PATCH' });
         const data = await response.json();
         this.setState({ products: data, loading: false });
     }

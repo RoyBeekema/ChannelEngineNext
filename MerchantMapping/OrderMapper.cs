@@ -6,7 +6,7 @@ namespace MerchantMapping
     // TODO[r.beekema] Use mapping for better design
     public static class OrderMapper
     {
-        public static OrderModel ToOrderData(Dictionary<string,object> orderLine)
+        public static OrderModel ToOrderModel(Dictionary<string,object> orderLine)
         {
             return new OrderModel
             {

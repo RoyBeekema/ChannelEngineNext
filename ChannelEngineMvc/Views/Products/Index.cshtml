@@ -22,10 +22,10 @@
                 <td>@d.MerchantProductNo</td>
                 <td id="@id">@d.Stock</td>
                 <td>
-                    <button onclick="updateProductsData('@id','@d.MerchantProductNo',0); return false;">0</button>
-                    <button onclick="updateProductsData('@id','@d.MerchantProductNo',parseInt(document.getElementById('@id').innerText)-1); return false;">-</button>
-                    <button onclick="updateProductsData('@id','@d.MerchantProductNo',parseInt(document.getElementById('@id').innerText)+1); return false;">+</button>
-                    <button onclick="updateProductsData('@id','@d.MerchantProductNo',25); return false;">25</button>
+                    <button onclick="setStock('@id','@d.MerchantProductNo',0); return false;">0</button>
+                    <button onclick="setStock('@id','@d.MerchantProductNo',parseInt(document.getElementById('@id').innerText)-1); return false;">-</button>
+                    <button onclick="setStock('@id','@d.MerchantProductNo',parseInt(document.getElementById('@id').innerText)+1); return false;">+</button>
+                    <button onclick="setStock('@id','@d.MerchantProductNo',25); return false;">25</button>
                 </td>
             </tr>
         }
@@ -35,9 +35,14 @@
 
 @section Scripts {
     <script>
-        function updateProductsData(cellId, merchantProductNo, stock) {
 
-            var url = location.href + '/Post?merchantProductNo=' + merchantProductNo + '&property=Stock&value=' + stock;
+        function setStock(cellId, merchantProductNo, stock) {
+            updateProductsData(cellId, merchantProductNo, 'Stock', stock);
+        }
+
+        function updateProductsData(cellId, merchantProductNo, property, stock) {
+
+            var url = location.href + '/Post?merchantProductNo=' + merchantProductNo + '&property=' + property + '&value=' + stock;
 
             fetch(url, { method: 'POST' })
                 .then(function (response) {
