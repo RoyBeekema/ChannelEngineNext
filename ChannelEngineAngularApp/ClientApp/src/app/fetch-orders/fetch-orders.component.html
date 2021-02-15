@@ -1,0 +1,22 @@
+<h1 id="tableLabel">Order data</h1>
+
+<p>Top 5, gesorteed op aantal aflopend.</p>
+
+<p *ngIf="!orders"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="orders">
+  <thead>
+    <tr>
+      <th>Beschrijving</th>
+      <th>Product nummer</th>
+      <th>Aantal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.description }}</td>
+      <td>{{ order.gtin }}</td>
+      <td>{{ order.quantity }}</td>
+    </tr>
+  </tbody>
+</table>

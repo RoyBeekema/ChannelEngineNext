@@ -1,0 +1,29 @@
+<h1 id="tableLabel">Products</h1>
+
+<p>Vooraad aanpasbaar via de lelijke knoppen</p>
+
+<p *ngIf="!products"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
+  <thead>
+    <tr>
+      <th>Beschrijving</th>
+      <th>Product nummer</th>
+      <th>Vooraad</th>
+      <th>Vooraad aanpassen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.name }}</td>
+      <td>{{ product.merchantProductNo }}</td>
+      <td>{{ product.stock }}</td>
+      <td>
+        <button (click)="setStock(product.merchantProductNo, 0)">0</button>
+        <button (click)="setStock(product.merchantProductNo, product.stock-1)">-</button>
+        <button (click)="setStock(product.merchantProductNo, product.stock+1)">+</button>
+        <button (click)="setStock(product.merchantProductNo, 25)">25</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

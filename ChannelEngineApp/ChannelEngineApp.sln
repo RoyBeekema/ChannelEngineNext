@@ -19,15 +19,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChannelEngineTest", "..\Cha
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChannelEngineMvcApp", "..\ChannelEngineMvc\ChannelEngineMvcApp.csproj", "{11D37168-9F2B-4E6F-ABA8-0E2BDF22FA53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MerchantDomain", "..\MerchantDomain\MerchantDomain.csproj", "{05206DFF-A4C5-4FAA-B10C-DB8E09EDF428}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MerchantDomain", "..\MerchantDomain\MerchantDomain.csproj", "{05206DFF-A4C5-4FAA-B10C-DB8E09EDF428}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MerchantMapping", "..\Mapping\MerchantMapping.csproj", "{89498B20-D2D5-4506-ABA9-B0BFC683AB62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MerchantData", "..\MerchantData\MerchantData.csproj", "{8A1112DA-30B6-4427-9EB7-2EBBE6C1D6F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MerchantData", "..\MerchantData\MerchantData.csproj", "{8A1112DA-30B6-4427-9EB7-2EBBE6C1D6F0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{9C35E782-4977-4BF3-8CA0-3586553CB9C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MerchantLogic", "..\MerchantLogic\MerchantLogic.csproj", "{A9D2FD6F-D7F0-4953-9522-B75730C78EEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MerchantLogic", "..\MerchantLogic\MerchantLogic.csproj", "{A9D2FD6F-D7F0-4953-9522-B75730C78EEC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChannelEngineAngularApp", "..\ChannelEngineAngularApp\ChannelEngineAngularApp\ChannelEngineAngularApp.csproj", "{7EE0F388-A7D1-4C04-8F0A-D846A006FB33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +69,10 @@ Global
 		{A9D2FD6F-D7F0-4953-9522-B75730C78EEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9D2FD6F-D7F0-4953-9522-B75730C78EEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9D2FD6F-D7F0-4953-9522-B75730C78EEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EE0F388-A7D1-4C04-8F0A-D846A006FB33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EE0F388-A7D1-4C04-8F0A-D846A006FB33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EE0F388-A7D1-4C04-8F0A-D846A006FB33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EE0F388-A7D1-4C04-8F0A-D846A006FB33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{89498B20-D2D5-4506-ABA9-B0BFC683AB62} = {F1F186E3-1034-4E23-8DEC-779AE439E641}
 		{8A1112DA-30B6-4427-9EB7-2EBBE6C1D6F0} = {9C35E782-4977-4BF3-8CA0-3586553CB9C3}
 		{A9D2FD6F-D7F0-4953-9522-B75730C78EEC} = {F1F186E3-1034-4E23-8DEC-779AE439E641}
+		{7EE0F388-A7D1-4C04-8F0A-D846A006FB33} = {63C64935-0023-4FA7-86C8-61EA26BD76D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5CF502E0-0A78-4541-8E9A-A17B8C45698C}
