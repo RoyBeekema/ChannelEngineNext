@@ -30,7 +30,17 @@ namespace ChannelEngineMvc.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(string merchantProductNo, string property, int value)
+        public async Task<PartialViewResult> Post(string merchantProductNo, string property, int value)
+        {
+            await _repository.Set(merchantProductNo, property, value);
+            await _repository.Sync();
+            var model = GetProducts();
+
+            return PartialView("Index",model);
+        }
+
+        [HttpPatch]
+        public async Task<IActionResult> Patch(string merchantProductNo, string property, int value)
         {
             await _repository.Set(merchantProductNo, property, value);
             await _repository.Sync();
@@ -38,7 +48,7 @@ namespace ChannelEngineMvc.Controllers
 
             return Json(model);
         }
-
+ 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

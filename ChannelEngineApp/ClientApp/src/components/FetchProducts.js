@@ -20,7 +20,7 @@ export class FetchProducts extends Component {
                         <th>Beschrijving</th>
                         <th>Product nummer</th>
                         <th>Voorraad</th>
-                        <th>Voorraad aanpassen</th>
+                        <th>Aanpassen</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,7 +54,7 @@ export class FetchProducts extends Component {
         return (
             <div>
                 <h1 id="tabelLabel" >Product data</h1>
-                <p>Vooraad aanpasbaar via de lelijke knoppen</p>
+                <p>Voorraad aanpasbaar via de lelijke knoppen</p>
                 {contents}
             </div>
         );
